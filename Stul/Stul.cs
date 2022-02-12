@@ -70,7 +70,8 @@ namespace StulKnihovna
         /// Vytvoří nový stůl. Může chvíli trvat, než se arduino připojí
         /// </summary>
         /// <param name="portName">Jméno portu</param>
-        public Stul(string portName)
+        /// <param name="timeout">Čas (ms), po kterém stůl přestane žkoušet připojování</param>
+        public Stul(string portName, int timeout = 10000)
         {
             try
             {
@@ -85,16 +86,23 @@ namespace StulKnihovna
                 //Otevře port
                 port = new SerialPort(portName, 115200, Parity.None, 8, StopBits.One);
                 port.Open();
+                port.ReadTimeout = timeout;
             }
             catch
             {
                 throw new Exception("Piči");
             }
 
+            DateTime start = DateTime.Now;
+
             //Počká na odpověď arduina
             while (port.ReadByte() != 255)
             {
                 Thread.Sleep(1);
+                if ((DateTime.Now - start).TotalMilliseconds > timeout)
+                {
+                    throw new TimeoutException();
+                }
             }
 
             //Pošle ?kontrolní byte?
