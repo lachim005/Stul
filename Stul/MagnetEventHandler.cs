@@ -9,12 +9,12 @@ namespace StulKnihovna
     /// <summary>
     /// Delegát pro <seealso cref="Stul.MagnetEvent"/>
     /// </summary>
-    public delegate void PixelEventHandler(object sender, PixelEventArgs e);
+    public delegate void MagnetEventHandler(object sender, MagnetEventArgs e);
 
     /// <summary>
     /// Obsahuje data o pixelu, který detekoval magnet
     /// </summary>
-    public class PixelEventArgs : EventArgs
+    public class MagnetEventArgs : EventArgs
     {
         public Pixel Pixel { get; set; }
         public int X { get; set; }
@@ -22,12 +22,12 @@ namespace StulKnihovna
         public int Deska { get; set; }
         public int PixelNaDesce { get; set; }
 
-        internal PixelEventArgs()
+        internal MagnetEventArgs()
         {
             
         }
 
-        internal PixelEventArgs(byte b, Stul stul)
+        internal MagnetEventArgs(byte b, Stul stul)
         {
             (int, int, int) data = Stul.DekodovatVstup(b);
             Deska = data.Item1;
