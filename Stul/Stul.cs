@@ -329,6 +329,7 @@ namespace StulKnihovna
                 for (int y = 0; y < vyska; y++)
                 {
                     pixely[x, y]._stav = stav;
+                    PixelZmenen(pixely[x, y]);
                 }
             }
             PortNapis(7, 0, (int)stav);
