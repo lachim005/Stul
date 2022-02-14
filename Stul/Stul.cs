@@ -40,6 +40,10 @@ namespace StulKnihovna
         /// Event, který se spustí při detekci magnetu některého z pixelů
         /// </summary>
         public event PixelEventHandler MagnetEvent;
+        /// <summary>
+        /// Event, který se spustí při změně barvy jakéhokoli pixelu
+        /// </summary>
+        public event PixelEventHandler ZmenaPixelu;
 
 
         #region Konstanty
@@ -330,6 +334,10 @@ namespace StulKnihovna
             PortNapis(7, 0, (int)stav);
         }
 
+        internal void PixelZmenen(Pixel pixel)
+        {
+            ZmenaPixelu?.Invoke(this, new PixelEventArgs(pixel));
+        }
         #region Implementace IDisposable
         public void Dispose()
         {

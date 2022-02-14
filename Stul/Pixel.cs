@@ -23,6 +23,7 @@ namespace StulKnihovna
             {
                 _stav = value;
                 stul.PortNapis(Deska, PixelNaDesce, (int)value);
+                stul.PixelZmenen(this);
             }
         }
 
