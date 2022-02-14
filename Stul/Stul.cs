@@ -39,7 +39,7 @@ namespace StulKnihovna
         /// <summary>
         /// Event, který se spustí při detekci magnetu některého z pixelů
         /// </summary>
-        public event MagnetEventHandler MagnetEvent;
+        public event PixelEventHandler MagnetEvent;
 
 
         #region Konstanty
@@ -264,7 +264,7 @@ namespace StulKnihovna
                 byte b = (byte)port.ReadByte();
                 if (PlantyPixel(b))
                 {
-                    MagnetEvent?.Invoke(this, new MagnetEventArgs(b, this));
+                    MagnetEvent?.Invoke(this, new PixelEventArgs(b, this));
                 }
 
                 Thread.Sleep(10);

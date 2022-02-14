@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace StulKnihovna
 {
     /// <summary>
-    /// Delegát pro <seealso cref="Stul.MagnetEvent"/>
+    /// Delegát pro eventy zahrnující pixely
     /// </summary>
-    public delegate void MagnetEventHandler(object sender, MagnetEventArgs e);
+    public delegate void PixelEventHandler(object sender, PixelEventArgs e);
 
     /// <summary>
-    /// Obsahuje data o pixelu, který detekoval magnet
+    /// Obsahuje data o pixelu, který vyvolal event
     /// </summary>
-    public class MagnetEventArgs : EventArgs
+    public class PixelEventArgs : EventArgs
     {
         public Pixel Pixel { get; set; }
         public int X { get; set; }
@@ -22,12 +22,12 @@ namespace StulKnihovna
         public int Deska { get; set; }
         public int PixelNaDesce { get; set; }
 
-        internal MagnetEventArgs()
+        internal PixelEventArgs()
         {
             
         }
 
-        internal MagnetEventArgs(byte b, Stul stul)
+        internal PixelEventArgs(byte b, Stul stul)
         {
             (int, int, int) data = Stul.DekodovatVstup(b);
             Deska = data.Item1;

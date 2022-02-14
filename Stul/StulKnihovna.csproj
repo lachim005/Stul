@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MagnetEventHandler.cs" />
+    <Compile Include="PixelEventHandler.cs" />
     <Compile Include="Pixel.cs" />
     <Compile Include="StavPixelu.cs" />
     <Compile Include="Stul.cs" />
