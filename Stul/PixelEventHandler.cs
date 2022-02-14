@@ -27,6 +27,15 @@ namespace StulKnihovna
             
         }
 
+        internal PixelEventArgs(Pixel pixel)
+        {
+            Pixel = pixel;
+            X = pixel.X;
+            Y = pixel.Y;
+            Deska = pixel.Deska;
+            PixelNaDesce = pixel.PixelNaDesce;
+        }
+
         internal PixelEventArgs(byte b, Stul stul)
         {
             (int, int, int) data = Stul.DekodovatVstup(b);
