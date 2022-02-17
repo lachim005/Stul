@@ -9,6 +9,8 @@ using (Stul stul = new Stul(nazevPortu))
 }
 ```
 K vypsání všech názvů portů lze použít [`System.IO.Ports.SerialPort.GetPortNames()`](https://docs.microsoft.com/cs-cz/dotnet/api/system.io.ports.serialport.getportnames?view=dotnet-plat-ext-6.0)
+
+Stůl by měl být použit v using bloku, nebo by se měla na konci zavolat metoda `Dispose()`
 ### Nastavení barvy pixelů
 ```csharp
 stul[x, y].Stav = StavPixelu.Cervena;
@@ -25,12 +27,12 @@ Pokud chceme reagovat na magnety přiložené k jednotlivým pixelům, přidáme
 stul.MagnetEvent += Stul_MagnetEvent;
 ```
 ```csharp
-private void Stul_MagnetEvent(object sender, MagnetEventArgs e)
+private void Stul_MagnetEvent(object sender, PixelEventArgs e)
 {
     //Reagování na magnety
 }
 ```
-`MagnetEventArgs` obsahuje informace o pixelu, který detekoval magnet, jako `e.X`, `e.Y` a `e.Pixel`
+[`PixelEventArgs`](Stul/PixelEventHandler.cs) obsahuje informace o pixelu, který detekoval magnet, jako `e.X`, `e.Y` a `e.Pixel`
 ## Ukázka
 Pixely na stole jsou ze začátku červené a zezelenají po přiložení magnetu.
 ```csharp
@@ -44,7 +46,7 @@ private static void Main()
     }
 }
 
-private static void Stul_MagnetEvent(object sender, MagnetEventArgs e)
+private static void Stul_MagnetEvent(object sender, PixelEventArgs e)
 {
     e.Pixel.Stav = StavPixelu.Zelena;
 }
