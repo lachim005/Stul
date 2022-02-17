@@ -99,23 +99,48 @@ namespace StulKnihovna
 
             DateTime start = DateTime.Now;
 
-            //Počká na odpověď arduina
-            while (port.ReadByte() != 255)
+            bool vraciJine = false;
+            try
             {
-                Thread.Sleep(1);
-                if ((DateTime.Now - start).TotalMilliseconds > timeout)
+                //Počká na odpověď arduina
+                while (port.ReadByte() != 255)
+                {
+                    Thread.Sleep(1);
+                    if ((DateTime.Now - start).TotalMilliseconds > timeout)
+                    {
+                        //Spustí se pouze, pokud port vrací neočekávané hodnoty
+                        //a asi se nejedná o správný port
+                        vraciJine = true;
+                        throw new TimeoutException();
+                    }
+                }
+
+                //Pošle ?kontrolní byte?
+                PortNapis(7, 7, 3);
+            }
+            catch (Exception ex)
+            {
+                if (!vraciJine)
+                {
+                    //Pošle ping a pokud se stůl odpoví, úspěšně připojí stůl
+                    PortNapis(7, 7, 2);
+                    Thread.Sleep(100);
+                    if (port.ReadByte() != 254)
+                    {
+                        throw new TimeoutException();
+                    }
+                } else
                 {
                     throw new TimeoutException();
                 }
             }
 
-            //Pošle ?kontrolní byte?
-            PortNapis(7, 7, 3);
-
             VygenerujPixely();
             NastavInterniMapuPixelu();
 
             port.ReadTimeout = SerialPort.InfiniteTimeout;
+
+            NastavVsechnyPixely(StavPixelu.Zadny);
 
             cteciVlakno = new Thread(CistMagnety);
             cteciVlakno.Start();
