@@ -115,6 +115,8 @@ namespace StulKnihovna
             VygenerujPixely();
             NastavInterniMapuPixelu();
 
+            port.ReadTimeout = SerialPort.InfiniteTimeout;
+
             cteciVlakno = new Thread(CistMagnety);
             cteciVlakno.Start();
 
