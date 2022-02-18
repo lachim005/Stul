@@ -309,11 +309,11 @@ namespace StulKnihovna
             {
                 if (d.Item1 < desky - 1)
                 {
-                    return d.Item2 >= 0 && d.Item2 < pixelyNaDesce && d.Item3 >= 0 && d.Item2 < 4;
+                    return d.Item2 >= 0 && d.Item2 < pixelyNaDesce && d.Item3 >= 0 && d.Item3 < 4;
                 }
                 else if (d.Item1 == desky - 1)
                 {
-                    return d.Item2 >= 0 && d.Item2 < pixelyNaPosledniDesce && d.Item3 >= 0 && d.Item2 < 4;
+                    return d.Item2 >= 0 && d.Item2 < pixelyNaPosledniDesce && d.Item3 >= 0 && d.Item3 < 4;
                 }
             }
             return false;
