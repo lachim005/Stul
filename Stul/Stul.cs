@@ -292,10 +292,13 @@ namespace StulKnihovna
         {
             while (!disposed)
             {
-                byte b = (byte)port.ReadByte();
-                if (PlantyPixel(b))
+                if (port.BytesToRead > 0)
                 {
-                    MagnetEvent?.Invoke(this, new PixelEventArgs(b, this));
+                    byte b = (byte)port.ReadByte();
+                    if (PlantyPixel(b))
+                    {
+                        MagnetEvent?.Invoke(this, new PixelEventArgs(b, this));
+                    }
                 }
 
                 Thread.Sleep(10);
