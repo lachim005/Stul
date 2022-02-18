@@ -43,7 +43,7 @@ namespace StulKnihovna
             PixelNaDesce = data.Item2;
             Pixel = stul.VratPixelInterni(Deska, PixelNaDesce);
             X = Pixel.X;
-            X = Pixel.Y;
+            Y = Pixel.Y;
         }
     }
 }
