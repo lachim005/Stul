@@ -79,14 +79,6 @@ namespace StulKnihovna
         {
             try
             {
-                //Tohle by mohlo vyřešit odpojování kabelu
-                port = new SerialPort(portName, 115200, Parity.None, 8, StopBits.One);
-                port.Open();
-                port.Close();
-                port.Dispose();
-                Thread.Sleep(100);
-
-                
                 //Otevře port
                 port = new SerialPort(portName, 115200, Parity.None, 8, StopBits.One);
                 port.Open();
